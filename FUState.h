@@ -4,7 +4,6 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <memory>
-class FUStateManager;
 
 class FUState
 {
