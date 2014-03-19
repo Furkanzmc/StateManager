@@ -2,7 +2,7 @@
 
 FUState::FUState(FUContext context)
     : mIsPaused(false)
-    , mDrawOverOtherStates(false)
+    , mIsOnTop(false)
 {
     (void)context;
 }
@@ -36,7 +36,12 @@ void FUState::resume()
     mIsPaused = false;
 }
 
-void FUState::setDrawOverOthers(bool drawOver)
+void FUState::setOnTop(bool drawOver)
 {
-    mDrawOverOtherStates = drawOver;
+    mIsOnTop = drawOver;
+}
+
+bool FUState::isOnTop()
+{
+    return mIsOnTop;
 }

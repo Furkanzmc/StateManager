@@ -19,7 +19,7 @@ void FUStateManager::handleEvent(sf::Event &event)
         StateStack::iterator iteratorEnd = mStatesMap.end();
         for (StateStack::iterator iterator = mStatesMap.begin(); iterator != iteratorEnd; iterator++) {
             auto found = std::find_if(iterator, iteratorEnd, [](std::pair<const int, std::unique_ptr<FUState>> &pair) {
-                return pair.second->getDrawOverOtherStates();
+                return pair.second->isOnTop();
             });
             //There's a state to draw over others handle its events
             if (found != mStatesMap.end()) {
@@ -37,7 +37,7 @@ void FUStateManager::update(sf::Time dt)
         StateStack::iterator iteratorEnd = mStatesMap.end();
         for (StateStack::iterator iterator = mStatesMap.begin(); iterator != iteratorEnd; iterator++) {
             auto found = std::find_if(iterator, iteratorEnd , [](std::pair<const int, std::unique_ptr<FUState>> &pair) {
-                return pair.second->getDrawOverOtherStates();
+                return pair.second->isOnTop();
             });
             //There's a state to draw over others update it
             if (found != mStatesMap.end()) {
@@ -55,7 +55,7 @@ void FUStateManager::draw()
         StateStack::iterator iteratorEnd = mStatesMap.end();
         for (StateStack::iterator iterator = mStatesMap.begin(); iterator != iteratorEnd; iterator++) {
             auto found = std::find_if(iterator, iteratorEnd, [](std::pair<const int, std::unique_ptr<FUState>> &pair) {
-                return pair.second->getDrawOverOtherStates();
+                return pair.second->isOnTop();
             });
             //There's a state to draw over others draw it
             if (found != mStatesMap.end()) {
