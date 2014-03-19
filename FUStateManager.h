@@ -14,7 +14,7 @@ public:
     void draw();
     template <class State>
     void addNewState(int stateIdentifier, FUState::FUContext context) {
-        mStatesMap.insert(std::make_pair(stateIdentifier, std::move(std::unique_ptr<State>(new State(context)))));
+        mStatesMap.insert(std::make_pair(stateIdentifier, std::move(std::shared_ptr<State>(new State(context)))));
     }
     bool removeState(int stateIdentifier);
     void clearStates();
@@ -22,8 +22,12 @@ public:
     void setCurrentState(int stateIdentifier);
 
 private:
-    //int is used as a enumerator, since every item in enumerator has an integer value
-    typedef std::map<int, std::unique_ptr<FUState>> StateStack;
+    /**
+     * @brief int is used as a enumerator, since every item in enumerator has an integer value
+     * We're using std::shared_ptr here because we don't want to deal with its destruction after it's removed from the map and so that
+     * we can access and use its private members
+     */
+    typedef std::map<int, std::shared_ptr<FUState>> StateStack;
     StateStack mStatesMap;
     int mCurrentStateIdentifier;
 };
