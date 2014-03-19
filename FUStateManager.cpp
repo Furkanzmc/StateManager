@@ -18,12 +18,9 @@ void FUStateManager::handleEvent(sf::Event &event)
         //Iterate through all the states and find the one that's to be drawed over
         StateStack::iterator iteratorEnd = mStatesMap.end();
         for (StateStack::iterator iterator = mStatesMap.begin(); iterator != iteratorEnd; iterator++) {
-            auto found = std::find_if(iterator, iteratorEnd, [](std::pair<const int, std::unique_ptr<FUState>> &pair) {
-                return pair.second->isOnTop();
-            });
-            //There's a state to draw over others handle its events
-            if (found != mStatesMap.end()) {
-                found->second->handleEvent(event);
+            auto found = iterator->second.get();
+            if (found->isOnTop()) {
+                found->handleEvent(event);
             }
         }
     }
@@ -36,12 +33,9 @@ void FUStateManager::update(sf::Time dt)
         //Iterate through all the states and find the one that's to be drawed over
         StateStack::iterator iteratorEnd = mStatesMap.end();
         for (StateStack::iterator iterator = mStatesMap.begin(); iterator != iteratorEnd; iterator++) {
-            auto found = std::find_if(iterator, iteratorEnd , [](std::pair<const int, std::unique_ptr<FUState>> &pair) {
-                return pair.second->isOnTop();
-            });
-            //There's a state to draw over others update it
-            if (found != mStatesMap.end()) {
-                found->second->update(dt);
+            auto found = iterator->second.get();
+            if (found->isOnTop()) {
+                found->update(dt);
             }
         }
     }
@@ -54,12 +48,9 @@ void FUStateManager::draw()
         //Iterate through all the states and find the one that's to be drawed over
         StateStack::iterator iteratorEnd = mStatesMap.end();
         for (StateStack::iterator iterator = mStatesMap.begin(); iterator != iteratorEnd; iterator++) {
-            auto found = std::find_if(iterator, iteratorEnd, [](std::pair<const int, std::unique_ptr<FUState>> &pair) {
-                return pair.second->isOnTop();
-            });
-            //There's a state to draw over others draw it
-            if (found != mStatesMap.end()) {
-                found->second->draw();
+            auto found = iterator->second.get();
+            if (found->isOnTop()) {
+                found->draw();
             }
         }
     }
