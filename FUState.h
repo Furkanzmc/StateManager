@@ -23,9 +23,21 @@ public:
     virtual void draw();
     virtual void pause();
     virtual void resume();
+    virtual void setDrawOverOthers(bool drawOver);
+    virtual bool getDrawOverOtherStates() {return mDrawOverOtherStates;}
 
 protected:
+    /**
+     * @brief Handle what happens when the state is paused inside that state
+     */
     bool mIsPaused;
+
+private:
+    /**
+     * @brief Draw order is determined according to a state's order in std::map. Since we're using ints as key elements,
+     * the bigger value will appear on top
+     */
+    bool mDrawOverOtherStates;
 };
 
 #endif // FUSTATE_H

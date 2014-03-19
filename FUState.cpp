@@ -2,6 +2,7 @@
 
 FUState::FUState(FUContext context)
     : mIsPaused(false)
+    , mDrawOverOtherStates(false)
 {
     (void)context;
 }
@@ -33,4 +34,9 @@ void FUState::pause()
 void FUState::resume()
 {
     mIsPaused = false;
+}
+
+void FUState::setDrawOverOthers(bool drawOver)
+{
+    mDrawOverOtherStates = drawOver;
 }
