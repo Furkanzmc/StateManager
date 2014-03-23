@@ -17,6 +17,11 @@ public:
     void clearStates();
     bool isStateStackEmpty();
     void setCurrentState(int stateIdentifier);
+    template <class T>
+    T* getState(int stateInentifier)
+    {
+        return dynamic_cast<T*>(mStatesMap.at(stateInentifier).get());
+    }
 
 private:
     /**
