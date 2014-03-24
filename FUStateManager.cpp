@@ -61,6 +61,12 @@ bool FUStateManager::isStateStackEmpty()
     return mStatesMap.empty();
 }
 
+void FUStateManager::addNewState(int stateIdentifier, std::unique_ptr<FUState> state)
+{
+    mStatesMap.insert(std::make_pair(stateIdentifier, std::move(state)));
+    state.reset();
+}
+
 bool FUStateManager::removeState(int stateIdentifier)
 {
     auto found = mStatesMap.find(stateIdentifier);

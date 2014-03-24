@@ -12,11 +12,7 @@ public:
     void handleEvent(sf::Event &event);
     void update(sf::Time dt);
     void draw();
-    template <class State>
-    void addNewState(int stateIdentifier, FUState::FUContext context)
-    {
-        mStatesMap.insert(std::make_pair(stateIdentifier, std::move(std::unique_ptr<State>(new State(context)))));
-    }
+    void addNewState(int stateIdentifier, std::unique_ptr<FUState> state);
     bool removeState(int stateIdentifier);
     void clearStates();
     bool isStateStackEmpty();
