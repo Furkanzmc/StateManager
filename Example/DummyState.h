@@ -6,7 +6,7 @@
 class DummyState : public FUState
 {
 public:
-    DummyState(FUContext context);
+    DummyState(std::shared_ptr<sf::RenderWindow> window);
     ~DummyState();
     //You only need to implement these three functions if you don't want to anything
     //different with the pause() and resume()

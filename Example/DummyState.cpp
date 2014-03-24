@@ -1,11 +1,11 @@
 #include "DummyState.h"
 #include <iostream>
 
-DummyState::DummyState(FUContext context)
-    : FUState(context)
+DummyState::DummyState(std::shared_ptr<sf::RenderWindow> window)
+    : FUState()
     , texture()
     , sprite()
-    , mRenderWindow(context.renderWindow)
+    , mRenderWindow(window)
 {
     texture.loadFromFile("/home/furkan/Pictures/Black Widow.jpg");
     sprite.setTexture(texture);

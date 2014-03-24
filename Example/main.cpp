@@ -1,7 +1,6 @@
 #include <iostream>
 #include "FUStateManager.h"
 #include "DummyState.h"
-#include "DummyState2.h"
 using namespace std;
 
 enum AD {
@@ -11,13 +10,11 @@ enum AD {
 
 int main()
 {
-    std::shared_ptr<sf::RenderWindow> window(new sf::RenderWindow(sf::VideoMode(640, 480), "SD", sf::Style::Default));
+    std::shared_ptr<sf::RenderWindow> window(new sf::RenderWindow(sf::VideoMode(640, 480), "State Manager", sf::Style::Default));
     FUStateManager manager;
-    //This example uses a minimal context. You can add the different variables to your context
-    FUState::FUContext context(window);
+    std::unique_ptr<DummyState> dummy(new DummyState(window));
     //AD:A enumerator can only have one state
-    manager.addNewState<DummyState>(AD::A, context);
-    manager.addNewState<DummyState2>(AD::B, context);
+    manager.addNewState(AD::A, std::move(dummy));
     manager.setCurrentState(AD::A);
     sf::Clock clock;
     while (window->isOpen()) {
