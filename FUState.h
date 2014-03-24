@@ -8,22 +8,32 @@
 class FUState
 {
 public:
-    struct FUContext {
-        FUContext(std::shared_ptr<sf::RenderWindow> window)
-            : renderWindow(window) {}
-        std::shared_ptr<sf::RenderWindow> renderWindow;
-    };
+    FUState()
+        : mIsPaused(false)
+        , mIsOnTop(false) {}
 
-public:
-    FUState(FUContext context);
-    virtual ~FUState();
-    virtual void handleEvent(sf::Event &event);
-    virtual void update(sf::Time dt);
-    virtual void draw();
-    virtual void pause();
-    virtual void resume();
-    virtual void setOnTop(bool drawOver);
-    virtual bool isOnTop();
+    virtual ~FUState() {}
+    virtual void handleEvent(sf::Event &event) = 0;
+    virtual void update(sf::Time dt) = 0;
+    virtual void draw() = 0;
+    virtual void pause()
+    {
+        mIsPaused = true;
+    }
+    virtual void resume()
+    {
+        mIsPaused = false;
+    }
+
+    virtual void setOnTop(bool drawOver)
+    {
+        mIsOnTop = drawOver;
+    }
+
+    virtual bool isOnTop()
+    {
+        return mIsOnTop;
+    }
 
 protected:
     /**
@@ -34,7 +44,8 @@ protected:
 private:
     /**
      * @brief Draw order is determined according to a state's order in std::map. Since we're using ints as key elements,
-     * the bigger value will appear on top
+     * the bigger value will appear on top. If the mIsOnTop value is true, the related state is drawn over others whether it's set as
+     * the current state or not.
      */
     bool mIsOnTop;
 };
