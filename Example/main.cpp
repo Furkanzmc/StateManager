@@ -11,7 +11,7 @@ enum AD {
 int main()
 {
     std::shared_ptr<sf::RenderWindow> window(new sf::RenderWindow(sf::VideoMode(640, 480), "State Manager", sf::Style::Default));
-    fu::StateManager manager;
+    zmc::StateManager manager;
     std::unique_ptr<DummyState> dummy(new DummyState(window));
     //AD:A enumerator can only have one state
     manager.addNewState(AD::A, std::move(dummy));

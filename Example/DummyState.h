@@ -3,7 +3,7 @@
 #include "State.h"
 #include <SFML/Graphics.hpp>
 
-class DummyState : public FUState
+class DummyState : public zmc::State
 {
 public:
     DummyState(std::shared_ptr<sf::RenderWindow> window);
