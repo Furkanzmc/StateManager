@@ -1,18 +1,20 @@
-#ifndef FUSTATE_H
-#define FUSTATE_H
+#ifndef STATE_H
+#define STATE_H
 #include <SFML/Window/Event.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <memory>
 
-class FUState
+namespace fu
+{
+class State
 {
 public:
-    FUState()
+    State()
         : mIsPaused(false)
         , mIsOnTop(false) {}
 
-    virtual ~FUState() {}
+    virtual ~State() {}
     virtual void handleEvent(sf::Event &event) = 0;
     virtual void update(sf::Time dt) = 0;
     virtual void draw() = 0;
@@ -49,5 +51,5 @@ private:
      */
     bool mIsOnTop;
 };
-
-#endif // FUSTATE_H
+}
+#endif // STATE_H

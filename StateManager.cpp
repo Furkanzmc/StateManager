@@ -1,17 +1,19 @@
-#include "FUStateManager.h"
+#include "StateManager.h"
 
-FUStateManager::FUStateManager()
+namespace fu
+{
+StateManager::StateManager()
     : mCurrentStateIdentifier(0)
 {
 
 }
 
-FUStateManager::~FUStateManager()
+StateManager::~StateManager()
 {
     mStatesMap.erase(mStatesMap.begin(), mStatesMap.end());
 }
 
-void FUStateManager::handleEvent(sf::Event &event)
+void StateManager::handleEvent(sf::Event &event)
 {
     if (isStateStackEmpty() == false) {
         mStatesMap.at(mCurrentStateIdentifier)->handleEvent(event);
@@ -26,7 +28,7 @@ void FUStateManager::handleEvent(sf::Event &event)
     }
 }
 
-void FUStateManager::update(sf::Time dt)
+void StateManager::update(sf::Time dt)
 {
     if (isStateStackEmpty() == false) {
         mStatesMap.at(mCurrentStateIdentifier)->update(dt);
@@ -41,7 +43,7 @@ void FUStateManager::update(sf::Time dt)
     }
 }
 
-void FUStateManager::draw()
+void StateManager::draw()
 {
     if (isStateStackEmpty() == false) {
         mStatesMap.at(mCurrentStateIdentifier)->draw();
@@ -56,18 +58,18 @@ void FUStateManager::draw()
     }
 }
 
-bool FUStateManager::isStateStackEmpty()
+bool StateManager::isStateStackEmpty()
 {
     return mStatesMap.empty();
 }
 
-void FUStateManager::addNewState(int stateIdentifier, std::unique_ptr<FUState> state)
+void StateManager::addNewState(int stateIdentifier, std::unique_ptr<fu::State> state)
 {
     mStatesMap.insert(std::make_pair(stateIdentifier, std::move(state)));
     state.reset();
 }
 
-bool FUStateManager::removeState(int stateIdentifier)
+bool StateManager::removeState(int stateIdentifier)
 {
     auto found = mStatesMap.find(stateIdentifier);
     //If the state doesn't return false
@@ -77,12 +79,13 @@ bool FUStateManager::removeState(int stateIdentifier)
     return true;
 }
 
-void FUStateManager::clearStates()
+void StateManager::clearStates()
 {
     mStatesMap.erase(mStatesMap.begin(), mStatesMap.end());
 }
 
-void FUStateManager::setCurrentState(int stateIdentifier)
+void StateManager::setCurrentState(int stateIdentifier)
 {
     mCurrentStateIdentifier = stateIdentifier;
+}
 }

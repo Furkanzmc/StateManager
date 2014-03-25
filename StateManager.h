@@ -1,18 +1,20 @@
-#ifndef FUSTATEMANAGER_H
-#define FUSTATEMANAGER_H
+#ifndef STATEMANAGER_H
+#define STATEMANAGER_H
 #include <map>
 #include <memory>
-#include "FUState.h"
+#include "State.h"
 
-class FUStateManager
+namespace fu
+{
+class StateManager
 {
 public:
-    FUStateManager();
-    ~FUStateManager();
+    StateManager();
+    ~StateManager();
     void handleEvent(sf::Event &event);
     void update(sf::Time dt);
     void draw();
-    void addNewState(int stateIdentifier, std::unique_ptr<FUState> state);
+    void addNewState(int stateIdentifier, std::unique_ptr<fu::State> state);
     bool removeState(int stateIdentifier);
     void clearStates();
     bool isStateStackEmpty();
@@ -27,8 +29,9 @@ private:
     /**
      * @brief int is used as a enumerator, since every item in enumerator has an integer value
      */
-    typedef std::map<int, std::unique_ptr<FUState>> StateStack;
+    typedef std::map<int, std::unique_ptr<fu::State>> StateStack;
     StateStack mStatesMap;
     int mCurrentStateIdentifier;
 };
-#endif // FUSTATEMANAGER_H
+}
+#endif // STATEMANAGER_H
