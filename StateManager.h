@@ -4,7 +4,7 @@
 #include <memory>
 #include "State.h"
 
-namespace fu
+namespace zmc
 {
 class StateManager
 {
@@ -14,7 +14,7 @@ public:
     void handleEvent(sf::Event &event);
     void update(sf::Time dt);
     void draw();
-    void addNewState(int stateIdentifier, std::unique_ptr<fu::State> state);
+    void addNewState(int stateIdentifier, std::unique_ptr<zmc::State> state);
     bool removeState(int stateIdentifier);
     void clearStates();
     bool isStateStackEmpty();
@@ -29,7 +29,7 @@ private:
     /**
      * @brief int is used as a enumerator, since every item in enumerator has an integer value
      */
-    typedef std::map<int, std::unique_ptr<fu::State>> StateStack;
+    typedef std::map<int, std::unique_ptr<zmc::State>> StateStack;
     StateStack mStatesMap;
     int mCurrentStateIdentifier;
 };

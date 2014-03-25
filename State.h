@@ -5,7 +5,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <memory>
 
-namespace fu
+namespace zmc
 {
 class State
 {

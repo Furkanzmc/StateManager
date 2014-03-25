@@ -1,6 +1,6 @@
 #include "StateManager.h"
 
-namespace fu
+namespace zmc
 {
 StateManager::StateManager()
     : mCurrentStateIdentifier(0)
@@ -63,7 +63,7 @@ bool StateManager::isStateStackEmpty()
     return mStatesMap.empty();
 }
 
-void StateManager::addNewState(int stateIdentifier, std::unique_ptr<fu::State> state)
+void StateManager::addNewState(int stateIdentifier, std::unique_ptr<zmc::State> state)
 {
     mStatesMap.insert(std::make_pair(stateIdentifier, std::move(state)));
     state.reset();
