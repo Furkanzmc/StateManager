@@ -2,7 +2,7 @@
 #include <iostream>
 
 DummyState::DummyState(std::shared_ptr<sf::RenderWindow> window)
-    : FUState()
+    : fu::State()
     , texture()
     , sprite()
     , mRenderWindow(window)

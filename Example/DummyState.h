@@ -1,6 +1,6 @@
 #ifndef DUMMYSTATE_H
 #define DUMMYSTATE_H
-#include "FUState.h"
+#include "State.h"
 #include <SFML/Graphics.hpp>
 
 class DummyState : public FUState
