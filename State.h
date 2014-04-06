@@ -37,13 +37,16 @@ public:
         return mIsOnTop;
     }
 
-protected:
+    bool isPaused()
+    {
+        return mIsPaused;
+    }
+
+private:
     /**
      * @brief Handle what happens when the state is paused inside that state
      */
     bool mIsPaused;
-
-private:
     /**
      * @brief Draw order is determined according to a state's order in std::map. Since we're using ints as key elements,
      * the bigger value will appear on top. If the mIsOnTop value is true, the related state is drawn over others whether it's set as
