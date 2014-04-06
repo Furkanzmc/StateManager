@@ -27,12 +27,12 @@ public:
         mIsPaused = false;
     }
 
-    virtual void setOnTop(bool drawOver)
+    void setOnTop(bool drawOver)
     {
         mIsOnTop = drawOver;
     }
 
-    virtual bool isOnTop()
+    bool isOnTop()
     {
         return mIsOnTop;
     }
