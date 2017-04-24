@@ -20,14 +20,14 @@ public:
     bool isStateStackEmpty();
     void setCurrentState(int stateIdentifier);
     template <class T>
-    T* getState(int stateInentifier)
+    T* getState(int stateIdentifier)
     {
-        return dynamic_cast<T*>(mStatesMap.at(stateInentifier).get());
+        return dynamic_cast<T*>(mStatesMap.at(stateIdentifier).get());
     }
 
 private:
     /**
-     * @brief int is used as a enumerator, since every item in enumerator has an integer value
+     * @brief int is used as an enumerator, since every item in enumerator has an integer value
      */
     typedef std::map<int, std::unique_ptr<zmc::State>> StateStack;
     StateStack mStatesMap;
